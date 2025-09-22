@@ -5,13 +5,13 @@
 
 ## The Problem  
 - Millions of children in low-income countries are unable to attend school because their families cannot pay the annual fees.  
-- Schools, teachers, and government-recognised institutions *already exist*. One of the main bottlenecks is **tuition costs**.  
-- Existing charities often:  
+- In many of these countries, schools, teachers, and government-recognised institutions *already exist*. One of the main bottlenecks is **tuition costs**.  
+- Existing NGOs and charities often:  
   - Spend heavily on overhead, marketing, or “feel-good” activities.  
   - Lack transparency (donors don’t see where their money goes).  
-  - Don’t scale, because they try to build new infrastructure instead of plugging into existing systems.  
+  - Don’t scale, because they try to build new infrastructure instead of plugging into existing systems.
 
-## Schoolyear Approach  
+## Schoolyear Approach
 - Treat education as a **unit of distribution**, for example:  
 - **€200 = 1 school year.**  
 - **Verifiable impact** → for every unit funded, we provide anonymised copies of official enrollment/completion certificates.  
@@ -23,8 +23,6 @@
 - **Efficient** → almost all funds go directly to the solution.  
 
 ## What Schoolyear is *Not*
-
-To stay focused and efficient, it is important to be clear about what Schoolyear does **not** attempt to solve.  
 
 1. **Not addressing the quality of education**  
    - Schoolyear does not intervene in teacher training, curriculum design, or classroom pedagogy.  
@@ -40,20 +38,15 @@ To stay focused and efficient, it is important to be clear about what Schoolyear
    - The system plugs into government-recognised institutions that already exist.  
    - The value lies in removing the financial bottleneck of school fees, not duplicating infrastructure.  
 
----
-
 ### Why these boundaries matter
 
 - **Clarity** → Donors, funders, and partners know exactly what their contribution does: *€200 = one year of school*.  
 - **Scalability** → Neutrality and simplicity make the system easy to replicate in multiple contexts without becoming entangled in policy debates.  
+- **Respect of local decision making** → NGOs, charities, and humanitarian organisations often implicitly push their own agendas — prioritising certain groups, imposing outside values, or tying funding to conditions. Schoolyear avoids this by remaining neutral and simply paying recognised school fees. Local institutions decide how to run their schools; the system only removes the financial barrier that prevents children from attending.
 
-> Schoolyear is a **distribution mechanism**: it channels funds directly into school years, with proof. Nothing more, nothing less.
+> Schoolyear is a **distribution mechanism**: it channels funds directly into school years, with proof.
 
-## The Mathematical Problem (Risk-Minimizing Allocation)
-
-We want the **optimal way to allocate a finite pool of funds** across many schools so that we **minimize the risk of default (or disruption)** at schools while respecting timing and budget constraints.
-
-## The Mathematical Problem (in plain language)
+## The Mathematical Problem
 
 In places like **Uganda**, a **primary school year costs ~€200** per child. That money usually covers **uniforms, books, meals, exam fees, and other essentials** that aren’t fully funded by the government. 
 
@@ -64,9 +57,9 @@ To keep schools running smoothly, we want to build a **pooled fund** that:
 This creates a **risk-management problem**:
 
 - What is the **best strategy to maximise continuity**—i.e., the odds that each partner school keeps receiving payments year after year?
-- When should we **add a new school** without endangering existing commitments?
-- How do we define an **acceptable risk threshold** for expansion?
-- How can we **estimate the reliability** of each **funder** (corporate donor, foundation, etc.) so our promises to schools are credible?
+- When should Schoolyear **add a new school** without endangering existing commitments?
+- How to define an **acceptable risk threshold** for expansion?
+- How can to **estimate the reliability** of each **funder** (corporate donor, foundation, etc.) so Schoolyear's promises to schools are credible?
 
 Below is a first draft of a framework that developers/researchers can formalise and simulate.
 
