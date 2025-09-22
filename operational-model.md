@@ -36,16 +36,41 @@ This document describes how Schoolyear relies on **existing, credible NGOs** to 
 
 ## Onboarding Workflow (via NGOs)
 
-```mermaid
-flowchart LR
-    A[NGO proposes school] --> B[Eligibility check\n(govt recognition, fee schedule)]
-    B -->|Pass| C[MoU & data-protection addendum]
-    B -->|Fail| X[Reject / remediate]
-    C --> D[Create school profile in registry\n(fee=€200/unit or local equivalent)]
-    D --> E[Provisional allocation set\n(based on fund/buffer rules)]
-    E --> F[Initial disbursement at academic year start]
-    F --> G[School teaches; NGO collects proof]
-    G --> H[Upload proof pack\n(anonymised certificates)]
-    H --> I[Automated checks + random audits]
-    I -->|Pass| J[Next year unlocked]
-    I -->|Fail/Delay| Y[Hold/reduce allocation\n+tickets for remediation]
+1. **NGO proposes school**  
+   - Submits basic info and request for onboarding.
+
+2. **Eligibility check**  
+   - Confirm government recognition (license/EMIS code).  
+   - Validate fee schedule and due dates.  
+   - Check class size and capacity.  
+   - Outcome: pass → continue; fail → reject or remediate.
+
+3. **MoU & data-protection addendum**  
+   - Formalise roles, timelines, and privacy responsibilities.
+
+4. **Create school profile in registry**  
+   - Register school with standardised fee = €200/unit (or local equivalent).  
+   - Assign school ID.
+
+5. **Set provisional allocation**  
+   - Based on current fund size and buffer rules.  
+   - Amount is capped for first-year onboarding.
+
+6. **Initial disbursement**  
+   - Release funds at academic year start once eligibility is confirmed.
+
+7. **School operates, NGO monitors**  
+   - Teaching proceeds.  
+   - NGO prepares to collect certificates.
+
+8. **Upload proof pack**  
+   - Anonymised certificates + summary sheet + exception log.  
+   - Submission deadline = end of academic year + grace period.
+
+9. **Validation**  
+   - Automated checks on completeness and formatting.  
+   - Random audits triggered as needed.
+
+10. **Decision**  
+    - If proof passes → next year’s allocation unlocked.  
+    - If proof fails or is delayed → allocation held, reduced, or flagged for remediation.
