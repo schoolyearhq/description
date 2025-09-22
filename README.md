@@ -51,26 +51,6 @@ To stay focused and efficient, it is important to be clear about what Schoolyear
 
 > Schoolyear is a **distribution mechanism**: it channels funds directly into school years, with proof. Nothing more, nothing less.
 
-## What We Need Help With  
-We want developers and system thinkers to help design a lean, auditable, and scalable platform.  
-Key open questions include:  
-
-1. **Data model** – how do we structure “school years” as verifiable units?  
-2. **Verification** – what’s the simplest system for collecting, anonymising, and publishing enrollment certificates?  
-3. **Donor portal** – how do we let donors (especially corporates) see impact clearly and securely?  
-4. **Efficiency** – what’s the lightest infrastructure that avoids overhead creep?  
-5. **Fraud prevention** – how do we minimise risk of fake students or double-counting?  
-
-## How to Contribute  
-- Discuss ideas in [Issues](../../issues).  
-- Propose simple system designs.  
-- Help us test lean prototypes.  
-- Share knowledge from similar domains (payments, transparency, auditing).  
-
----
-
-✦ This project is at the **idea and pilot stage**. We’re not asking for donations — we’re asking for **collaborators** who want to help design a transparent, scalable way to fund education.
-
 ## The Mathematical Problem (Risk-Minimizing Allocation)
 
 We want the **optimal way to allocate a finite pool of funds** across many schools so that we **minimize the risk of default (or disruption)** at schools while respecting timing and budget constraints.
