@@ -1,6 +1,6 @@
 ## The Mathematical Problem
 
-A school with 100 students costs $20,000/year. How should Schoolyear decide how to allocate the funds year after year?
+A school with 100 students costs $20,000/year. How should Schoolyear decide how to allocate the funds, year after year?
 
 ---
 
