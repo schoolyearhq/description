@@ -13,14 +13,14 @@
 
 ## Schoolyear Approach
 - Treat education as a **unit of distribution**, for example:  
-- **€200 = 1 school year.**  
+- **$200 = 1 school year.**  
 - **Verifiable impact** → for every unit funded, we provide anonymised copies of official enrollment/completion certificates.  
 - **No feel-good charity** → just clean infrastructure that channels resources into existing schools.  
 
 ## Advantages  
 - **Scalable** → the model can run anywhere there are schools + fees.  
 - **Transparent** → donors see proof of exactly what they funded.  
-- **Efficient** → almost all funds go directly to the solution.  
+- **Efficient** → almost all funds go directly to the solution.
 
 ## What Schoolyear is *Not*
 
@@ -40,8 +40,8 @@
 
 ### Why these boundaries matter
 
-- **Clarity** → Donors, funders, and partners know exactly what their contribution does: *€200 = one year of school*.  
+- **Clarity** → Donors, funders, and partners know exactly what their contribution does: *$200 = one year of school*.  
 - **Scalability** → Neutrality and simplicity make the system easy to replicate in multiple contexts without becoming entangled in policy debates.  
 - **Respect of local decision making** → NGOs, charities, and humanitarian organisations often implicitly push their own agendas — prioritising certain groups, imposing outside values, or tying funding to conditions. Schoolyear avoids this by remaining neutral and simply paying recognised school fees. Local institutions decide how to run their schools; the system only removes the financial barrier that prevents children from attending.
 
-> Schoolyear is a **distribution mechanism**: it channels funds directly into school years, with proof.
+Schoolyear is a **distribution mechanism**: it channels funds directly into school years, with proof.
