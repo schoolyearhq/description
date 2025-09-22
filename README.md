@@ -2,20 +2,20 @@
 
 ## The Problem  
 - Millions of children in low-income countries are unable to attend school because their families cannot pay the annual fees.  
-- Schools, teachers, and government-recognised institutions *already exist*. The bottleneck is **tuition costs**.  
+- Schools, teachers, and government-recognised institutions *already exist*. One of the main bottlenecks is **tuition costs**.  
 - Existing charities often:  
   - Spend heavily on overhead, marketing, or “feel-good” activities.  
   - Lack transparency (donors don’t see where their money goes).  
   - Don’t scale, because they try to build new infrastructure instead of plugging into existing systems.  
 
-## Our Approach  
-- Treat education as a **unit of distribution**:  
+## Schoolyear Approach  
+- Treat education as a **unit of distribution**, for example:  
   - **€200 = 1 school year.**  
-- **98% efficiency target** → money goes directly to paying school fees at recognised institutions.  
+- **98% efficiency target** → money goes directly to paying school fees at recognised institutions, which emit a receipt.  
 - **Verifiable impact** → for every unit funded, we provide anonymised copies of official enrollment/completion certificates.  
 - **No feel-good charity** → just clean infrastructure that channels resources into existing schools.  
 
-## Why This Matters  
+## Advantages  
 - **Scalable** → the model can run anywhere there are schools + fees.  
 - **Transparent** → donors see proof of exactly what they funded.  
 - **Efficient** → almost all funds go directly to the solution.  
@@ -44,69 +44,150 @@ Key open questions include:
 
 We want the **optimal way to allocate a finite pool of funds** across many schools so that we **minimize the risk of default (or disruption)** at schools while respecting timing and budget constraints.
 
-### Formalization (first draft)
+## The Mathematical Problem (in plain language)
 
-- **Sets**
-  - Schools \(i \in \{1,\dots,N\}\); each may represent a single school or a batch (grade, district).
-  - Billing periods \(t \in \{1,\dots,T\}\) (e.g., months/terms).
+In places like **Uganda**, a **primary school year costs ~€200** per child. That money usually covers **uniforms, books, meals, exam fees, and other essentials** that aren’t fully funded by the government. 
 
-- **Parameters**
-  - \(f_{i,t}\): fee due at school \(i\) in period \(t\).
-  - \(d_{i,t}\): due date (or latest safe payment date) for \(f_{i,t}\).
-  - \(B_t\): budget available in period \(t\) (cash on hand + expected inflows).
-  - \(p_{i,t}\): penalty if \(f_{i,t}\) is missed/late (can be monetary or mapped to risk points).
-  - \(r_{i,t}(\Delta)\): **default risk function** for school \(i\) if payment is delayed by \(\Delta\) days relative to \(d_{i,t}\). Monotone increasing in \(\Delta\).
-  - \(w_i\): priority weight (e.g., number of students covered, equity weighting).
+To keep schools running smoothly, we want to build a **pooled fund** that:
+1. sends each partner school an **up-front allocation at the start of the academic year**, and
+2. **releases next year’s allocation only if last year’s anonymised enrollment/completion certificates were provided** (our proof of impact).
 
-- **Decision variables**
-  - \(x_{i,t} \in [0,f_{i,t}]\): amount paid to school \(i\) in period \(t\).
-  - \(s_{i,t} \ge 0\): shortfall at \((i,t)\), where \(s_{i,t} = f_{i,t} - \sum_{\tau \le t} x_{i,\tau}\).
+This creates a **risk-management problem**:
 
-- **Objective (examples)**
-  1. **Minimize expected default risk**  
-     \[
-     \min \sum_{i,t} w_i \cdot r_{i,t}\!\big(\mathrm{late}_{i,t}\big)
-     \]
-     where \(\mathrm{late}_{i,t}\) is the days late implied by remaining shortfall \(s_{i,t}\) after \(d_{i,t}\).
-  2. **Or** a hybrid: minimize (risk + financial penalties)  
-     \[
-     \min \sum_{i,t} \big[w_i \cdot r_{i,t}(\cdot) + \lambda \, p_{i,t}\cdot \mathbb{1}\{s_{i,t}>0\}\big]
-     \]
+- What is the **best strategy to maximise continuity**—i.e., the odds that each partner school keeps receiving payments year after year?
+- When should we **add a new school** without endangering existing commitments?
+- How do we define an **acceptable risk threshold** for expansion?
+- How can we **estimate the reliability** of each **funder** (corporate donor, foundation, etc.) so our promises to schools are credible?
 
-- **Constraints**
-  - **Budget per period:** \(\sum_i x_{i,t} \le B_t \quad \forall t\)
-  - **No overpaying:** \(0 \le x_{i,t} \le f_{i,t}\)
-  - **Carryover optional:** unspent \(B_t\) can roll into \(B_{t+1}\) if treasury policy allows.
-  - **Service level (optional):** \(\Pr[s_{i,t}=0] \ge \alpha\) for target reliability \(\alpha\) (chance-constraints).
+Below is a first draft of a framework that developers/researchers can formalise and simulate.
 
-### Modeling the risk function \(r_{i,t}(\cdot)\)
+---
 
-We’re open to proposals. Options include:
-- **Piecewise-linear lateness cost** (simple, MILP-friendly).
-- **Survival/hazard model** using historical defaults vs. delay.
-- **Logistic risk:** \(r(\Delta)=\frac{1}{1+e^{-(a_i+b_i\Delta)}}\).
-- **Queueing/credit-risk analogs** for cascading effects.
+### 1) Core goal
 
-### Baselines to beat
+> **Allocate a finite yearly budget across schools to minimise the risk of disruption (missed payments) while safely expanding to new schools.**
 
-- **EDD (Earliest Due Date)**: pay the soonest deadlines first.
-- **Risk-Weighted EDD**: order by \(w_i \cdot \partial r_{i,t}/\partial \Delta\) at current lateness.
-- **Knapsack per period**: choose payments that maximize risk reduction per euro.
+We measure *disruption* as: a school that was promised support but **doesn’t receive the full amount on time** for the coming academic year.
 
-### What we want from contributors
+---
 
-- A **tractable optimization** (LP/MILP/stochastic program or heuristic) that:
-  - Works online with partial information and rolling budgets.
-  - Produces **payment schedules** \(x_{i,t}\) and **risk reports**.
-  - Handles **uncertain inflows** (Monte Carlo / robust constraints).
-- A minimal **simulation harness** to compare policies on synthetic data:
-  - Inputs: \(\{f_{i,t}, d_{i,t}, B_t, w_i, r_{i,t}\}\)
-  - Outputs: defaults avoided, total penalties, % on-time, compute time.
+### 2) Inputs (what we track)
 
-### Edge cases & policy knobs
+- **Schools** \(i = 1..N\)
+  - Annual need per school \(C_i\) (e.g., €200 × number of sponsored students).
+  - Due date \(D_i\) (start of school year / latest safe payment date).
+  - **Compliance score** \(K_i\) (0–1): did they deliver certificates on time last year? quality? audit flags?
+  - **Priority weight** \(W_i\) (e.g., equity, girls’ education, rural hardship).
 
-- Hard caps per school (equity): \(x_{i,\cdot} \le \beta_i\).
-- Reserve buffer: keep \(k\%\) of \(B_t\) uncommitted for shocks.
-- Prepayment discounts or installment plans (change \(f_{i,t}\), \(p_{i,t}\)).
+- **Funders** \(j = 1..M\)
+  - Pledged amount \(P_j\) and **payment schedule** (lump sum vs quarterly).
+  - **Reliability score** \(R_j \in [0,1]\): probability they pay as pledged (based on track record, contract type, credit proxy).
+  - Correlation info (optional): are some funders correlated (e.g., same industry cycle)?
 
-> **Goal:** a lean algorithm that can run nightly to recommend payments that **minimize expected defaults** under a rolling budget, with clear guarantees or strong empirical performance.
+- **Treasury**
+  - Cash in bank at t=0 and expected inflows over the year (from funders).
+  - Reserve policy: minimum **buffer** \(b\%\) of expected inflows kept uncommitted.
+
+---
+
+### 3) Key risk ideas (simple, but useful)
+
+- **Funding reliability (portfolio view)**  
+  Compute **expected available funds** and a **downside (stress) scenario**:
+  - Expected: \( \mathbb{E}[\text{Funds}] = \sum_j R_j \cdot P_j \)
+  - Stress (e.g., 10th percentile): assume a subset of funders under-deliver (simulate via Monte Carlo or apply haircut \(h\%\)).
+
+- **School continuity risk**  
+  A school is at risk if its allocation depends on fragile inflows. Useful surrogate:
+  \[
+  \text{ContinuityScore}_i = K_i \cdot \frac{\text{CommittedSecure}_i}{C_i}
+  \]
+  where *CommittedSecure* is funded from high-reliability sources plus treasury buffer. Higher is safer.
+
+- **System expansion risk**  
+  Define a target **Probability of Coverage** \( \Pr(\text{all existing schools fully funded on time}) \ge \alpha \) (e.g., 95%).  
+  Only add schools if this constraint remains true under the **stress scenario**.
+
+---
+
+### 4) Policies we can implement (and compare)
+
+#### A. Allocation at year start (who gets paid first?)
+- **Continuity-first**: fully fund all existing compliant schools (highest \(K_i\)) **in order of earliest due date** \(D_i\), while keeping the reserve buffer.
+- **Risk-weighted priority**: rank by \( W_i \times K_i \times \text{ContinuityScore}_i \) (or its shortfall), pay until the stress-tested budget is exhausted.
+- **Hybrid**: guarantee a **baseline %** (e.g., 80%) to every compliant school, then distribute remaining funds by risk-weighted priority.
+
+#### B. When to add a new school?
+Only add a new school \(s\) if **all** are true:
+1. **Compliance gate**: last year’s certificates from existing schools were received (or exceptions are justified).
+2. **Coverage constraint**: under stress, \(\Pr(\text{existing fully funded on time}) \ge \alpha\).
+3. **Buffer intact**: reserve after adding \(s\) remains ≥ \(b\%\).
+4. **Unit test**: the new school has passed **onboarding checks** (licensing, fee validation) → provisional \(K_s\) is acceptable.
+5. **Diversity** (optional): avoid concentration (e.g., max share per country/district).
+
+#### C. What is an acceptable expansion risk?
+Pick **two numbers** and stick to them:
+- **Reliability target**: \(\alpha = 95\%\) (or 97.5%) probability that all existing schools are funded on time, **under stress**.
+- **Buffer**: \(b = 15\%\) (example) of expected annual inflows kept as cash or near-cash.
+
+Expansion proceeds only when both are satisfied.
+
+---
+
+### 5) Estimating **funder reliability** \(R_j\)
+
+A simple scorecard (0–100 → scale to 0–1):
+
+- **Track record** (on-time payments last 2 years): up to 40 pts  
+- **Contract strength** (binding agreement vs soft pledge): up to 20 pts  
+- **Payment schedule** (lump sum early > quarterly > end-loaded): up to 15 pts  
+- **Financial health proxy** (public info/ratings): up to 15 pts  
+- **Concentration risk** (not all from one sector/country): up to 10 pts  
+
+**Map to \(R_j\)**:  
+- 85–100 → 0.95  
+- 70–84  → 0.85  
+- 50–69  → 0.70  
+- <50    → 0.50 (or exclude)
+
+Update \(R_j\) **Bayesian-style** each quarter: if they pay on time, nudge up; if they’re late/miss, nudge down.
+
+---
+
+### 6) Minimal math formulation (for implementers)
+
+- **Decision**: allocation \(x_i \in [0, C_i]\) at year start.
+- **Budget constraint (stress-tested)**:
+  \[
+  \sum_i x_i \le (1-b)\cdot \text{Funds}_{\text{stress}}
+  \]
+- **Objective (one option)**: maximise risk-adjusted continuity
+  \[
+  \max \sum_i W_i \cdot K_i \cdot \min\!\left(1,\ \frac{x_i}{C_i}\right)
+  \]
+- **Guarantee**: all previously supported, compliant schools \(i\) must receive \(x_i \ge C_i\) **before** any new additions—unless violating the buffer or \(\alpha\)-constraint.
+
+This can be solved as a **small LP/MILP**, then re-run whenever pledges change.
+
+---
+
+### 7) What to build (developer brief)
+
+- A tiny **simulator**:
+  - Inputs: schools \(\{C_i, D_i, K_i, W_i\}\), funders \(\{P_j, R_j\}\), buffer \(b\), reliability target \(\alpha\).
+  - Engine:  
+    1) compute stress funds (Monte Carlo or haircut),  
+    2) allocate by chosen policy,  
+    3) report who is fully covered, buffer remaining, and \(\Pr(\text{coverage})\).
+- **Dashboards**:
+  - “Can we add 5 schools?” → green/red based on \(\alpha\) & buffer.
+  - “Which funders drive risk?” → sensitivity by \(R_j\).
+  - “What’s our continuity score by country?” → prioritise attention.
+
+---
+
+### 8) Why this matters
+
+Schools can’t run on broken promises. This framework helps us **keep the lights on** for existing partners and **expand safely** when the numbers say it’s wise—grounded in simple, transparent rules anyone can audit.
+
+> **Call for contributions:** propose better risk metrics, smarter allocation heuristics, or a compact LP/MILP. Even a clean Monte Carlo notebook comparing policies (EDD vs risk-weighted vs hybrid) would be enormously valuable.
