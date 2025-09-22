@@ -1,3 +1,6 @@
+
+![Schoolyear Diagram](img.webp)
+
 # Schoolyear – Open Problem Statement
 
 ## The Problem  
