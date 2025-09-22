@@ -2,6 +2,8 @@
 
 A school with 100 students costs $20,000/year. How should Schoolyear decide how to allocate the funds?
 
+---
+
 In places like **Uganda**, a **primary school year costs ~€200** per child. That money usually covers **uniforms, books, meals, exam fees, and other essentials** that aren’t fully funded by the government. 
 
 To keep schools running smoothly, we want to build a **pooled fund** that:
