@@ -13,8 +13,7 @@
 
 ## Schoolyear Approach  
 - Treat education as a **unit of distribution**, for example:  
-  - **€200 = 1 school year.**  
-- **98% efficiency target at scale** → money goes directly to paying school fees at recognised institutions, which emit a receipt.  
+- **€200 = 1 school year.**  
 - **Verifiable impact** → for every unit funded, we provide anonymised copies of official enrollment/completion certificates.  
 - **No feel-good charity** → just clean infrastructure that channels resources into existing schools.  
 
@@ -46,7 +45,6 @@ To stay focused and efficient, it is important to be clear about what Schoolyear
 ### Why these boundaries matter
 
 - **Clarity** → Donors, funders, and partners know exactly what their contribution does: *€200 = one year of school*.  
-- **Efficiency** → By avoiding scope creep into quality, equity politics, or infrastructure, the model maintains the **98% efficiency target at scale**.  
 - **Scalability** → Neutrality and simplicity make the system easy to replicate in multiple contexts without becoming entangled in policy debates.  
 
 > Schoolyear is a **distribution mechanism**: it channels funds directly into school years, with proof. Nothing more, nothing less.
