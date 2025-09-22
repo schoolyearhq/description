@@ -20,6 +20,34 @@
 - **Transparent** → donors see proof of exactly what they funded.  
 - **Efficient** → almost all funds go directly to the solution.  
 
+## What Schoolyear is *Not*
+
+To stay focused and efficient, it is important to be clear about what Schoolyear does **not** attempt to solve.  
+
+1. **Not addressing the quality of education**  
+   - Schoolyear does not intervene in teacher training, curriculum design, or classroom pedagogy.  
+   - Many organisations already work on improving quality; the role of Schoolyear is to ensure that more children can access school in the first place.  
+
+2. **Not preferring one demographic segment over another**  
+   - Schoolyear is not designed to prioritise boys over girls, or vice versa.  
+   - Every child’s school year is treated as the same €200 unit in the model, and funding is provided on equal terms.  
+   - Partner organisations may choose to emphasise particular groups, but the underlying infrastructure remains neutral.  
+
+3. **Not building or managing physical infrastructure**  
+   - Schoolyear does not construct schools, hire teachers, or run logistics.  
+   - The system plugs into government-recognised institutions that already exist.  
+   - The value lies in removing the financial bottleneck of school fees, not duplicating infrastructure.  
+
+---
+
+### Why these boundaries matter
+
+- **Clarity** → Donors, funders, and partners know exactly what their contribution does: *€200 = one year of school*.  
+- **Efficiency** → By avoiding scope creep into quality, equity politics, or infrastructure, the model maintains the **98% efficiency target**.  
+- **Scalability** → Neutrality and simplicity make the system easy to replicate in multiple contexts without becoming entangled in policy debates.  
+
+> Schoolyear is a **distribution mechanism**: it channels funds directly into school years, with proof. Nothing more, nothing less.
+
 ## What We Need Help With  
 We want developers and system thinkers to help design a lean, auditable, and scalable platform.  
 Key open questions include:  
@@ -185,9 +213,3 @@ This can be solved as a **small LP/MILP**, then re-run whenever pledges change.
   - “What’s our continuity score by country?” → prioritise attention.
 
 ---
-
-### 8) Why this matters
-
-Schools can’t run on broken promises. This framework helps us **keep the lights on** for existing partners and **expand safely** when the numbers say it’s wise—grounded in simple, transparent rules anyone can audit.
-
-> **Call for contributions:** propose better risk metrics, smarter allocation heuristics, or a compact LP/MILP. Even a clean Monte Carlo notebook comparing policies (EDD vs risk-weighted vs hybrid) would be enormously valuable.
