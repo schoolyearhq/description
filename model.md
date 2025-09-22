@@ -4,7 +4,7 @@ A school with 100 students costs $20,000/year. How should Schoolyear decide how 
 
 ---
 
-In places like **Uganda**, a **primary school year costs ~€200** per child. That money usually covers **uniforms, books, meals, exam fees, and other essentials** that aren’t fully funded by the government. 
+In places like **Uganda**, a **primary school year costs ~$200** per child. That money usually covers **uniforms, books, meals, exam fees, and other essentials** that aren’t fully funded by the government. 
 
 To keep schools running smoothly, we want to build a **pooled fund** that:
 1. sends each partner school an **up-front allocation at the start of the academic year**, and
@@ -32,7 +32,7 @@ We measure *disruption* as: a school that was promised support but **doesn’t r
 ### 2) Inputs (what we track)
 
 - **Schools** \(i = 1..N\)
-  - Annual need per school \(C_i\) (e.g., €200 × number of sponsored students).
+  - Annual need per school \(C_i\) (e.g., $200 × number of sponsored students).
   - Due date \(D_i\) (start of school year / latest safe payment date).
   - **Compliance score** \(K_i\) (0–1): did they deliver certificates on time last year? quality? audit flags?
   - **Priority weight** \(W_i\) (e.g., equity, girls’ education, rural hardship).
